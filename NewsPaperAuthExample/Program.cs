@@ -10,13 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//TODO : add the actual connection string
 builder.Services.AddDbContext<RepoContext>(options =>
 {
-    options.UseSqlServer("WHEN WE HAVE A DB!");
+    options.UseSqlServer("Server=postgress;Database=NewsPaper;Trusted_Connection=True;");
 });
 
-//TODO add auto migration when a migration is pending
 using (var context = new RepoContext(builder.Services.BuildServiceProvider().GetService<DbContextOptions<RepoContext>>()))
 {
     //check if there are any pending migrations
