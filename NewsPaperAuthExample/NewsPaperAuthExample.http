@@ -1,0 +1,6 @@
+@NewsPaperAuthExample_HostAddress = http://localhost:5077
+
+GET {{NewsPaperAuthExample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
