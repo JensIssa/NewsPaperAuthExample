@@ -10,23 +10,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<RepoContext>(options =>
-{
-    options.UseSqlServer("Server=postgress;Database=NewsPaper;Trusted_Connection=True;");
-});
-
-using (var context = new RepoContext(builder.Services.BuildServiceProvider().GetService<DbContextOptions<RepoContext>>()))
-{
-    //check if there are any pending migrations
-    if (context.Database.GetPendingMigrations().Any())
-    {
-        //apply any pending migrations
-        context.Database.Migrate();
-    }
-}
+builder.Services.AddDbContext<RepoContext>(options => options.UseNpgsql("Server=localhost:5432;Database=NewsPaper;Username=postgres;Password=SuperSecret7!;"));
 
 
 var app = builder.Build();
+
+//apply any migrations if any
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<RepoContext>();
+
+    //check if any pending migrations
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
