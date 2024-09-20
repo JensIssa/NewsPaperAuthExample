@@ -6,6 +6,7 @@ using NewsPaperAuthExample.Service;
 
 namespace NewsPaperAuthExample.Controllers
 {
+    [Route("[controller]")]
     public class ArticleController : ControllerBase
     {
         IService _service;
