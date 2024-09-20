@@ -1,14 +1,8 @@
-﻿namespace NewsPaperAuthExample.Entities
+﻿using Microsoft.AspNetCore.Identity;
+namespace NewsPaperAuthExample.Entities
 {
-    public class User
+    public class User: IdentityUser<int>
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
-        public string PasswordHash { get; set; }
-
-
-
     }
 }

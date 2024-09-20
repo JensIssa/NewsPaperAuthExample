@@ -1,5 +1,10 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NewsPaperAuthExample.Entities;
+using NewsPaperAuthExample.Entities.DTO.Users;
 using NewsPaperAuthExample.Repo;
+using NewsPaperAuthExample.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,28 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<RepoContext>(options => options.UseNpgsql("Server=localhost:5432;Database=NewsPaper;Username=postgres;Password=SuperSecret7!;"));
 
+builder.Services.AddScoped<IUserRepo,  UserRepo>();
+
+builder.Services.AddScoped<IRepo, Repo>();
+builder.Services.AddScoped<IService, Service>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+var mapper = new MapperConfiguration(options =>
+{
+
+    options.CreateMap<UserAddDTO, User>();
+    options.CreateMap<UserEditDTO, User>();
+    options.CreateMap<User, UserGetDTO>();
+}).CreateMapper();
+
+
+builder.Services.AddIdentity<User, Role>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+    .AddEntityFrameworkStores<RepoContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
