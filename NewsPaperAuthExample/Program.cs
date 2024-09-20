@@ -18,14 +18,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<RepoContext>(options => options.UseNpgsql("Server=localhost:5432;Database=NewsPaper;Username=postgres;Password=SuperSecret7!;"));
+builder.Services.AddDbContext<RepoContext>(options => options.UseNpgsql("Server=postgres;Database=NewsPaper;Username=postgres;Password=SuperSecret7!;"));
 
 builder.Services.AddScoped<IUserRepo,  UserRepo>();
 
 builder.Services.AddScoped<IRepo, Repo>();
+
 builder.Services.AddScoped<IService, Service>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<ICommentService, CommentService>();
+
+builder.Services.AddScoped<ICommentRepo, CommentRepo>();
 
 var mapper = new MapperConfiguration(options =>
 {
@@ -35,6 +40,7 @@ var mapper = new MapperConfiguration(options =>
     options.CreateMap<User, UserGetDTO>();
 }).CreateMapper();
 
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddIdentity<User, Role>(options =>
 {
