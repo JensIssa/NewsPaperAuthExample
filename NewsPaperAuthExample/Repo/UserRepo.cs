@@ -65,7 +65,7 @@ namespace NewsPaperAuthExample.Repo
 
         public async Task<List<string>> GetRolesAsync(User user)
         {
-            var roles = await (from userRole in _context.UserRoles
+            List<String> roles = await (from userRole in _context.UserRoles
                                join role in _context.Roles on userRole.RoleId equals role.Id
                                where userRole.UserId == user.Id
                                select role.Name).ToListAsync();
