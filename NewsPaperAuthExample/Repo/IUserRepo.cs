@@ -23,7 +23,7 @@ namespace NewsPaperAuthExample.Repo
         /// </summary>
         /// <param name="user">The parameters of the user being created</param>
         /// <returns></returns>
-        Task CreateUserAsync(User user);
+        Task CreateUserAsync(User user, string roleName);
 
         /// <summary>
         /// Updates the user
@@ -31,5 +31,15 @@ namespace NewsPaperAuthExample.Repo
         /// <param name="user">The user being updated</param>
         /// <returns>The updated user</returns>
         Task UpdateUserAsync(User user);
+
+        Task<List<string>> GetRolesAsync(User user);
+
+        Task<User> GetUserByEmailAsync(string email);
+        Task<bool> ValidateUserCredentialsAsync(string email, string password);
+
+
+
+
+
     }
 }

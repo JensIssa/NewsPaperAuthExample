@@ -22,14 +22,29 @@ namespace NewsPaperAuthExample.Service
             return await _userRepo.GetUserByIdAsync(id);
         }
 
-        public async Task CreateUserAsync(User user)
+        public async Task CreateUserAsync(User user, string roleName)
         {
-            await _userRepo.CreateUserAsync(user);
+            await _userRepo.CreateUserAsync(user, roleName);
         }
 
         public async Task UpdateUserAsync(User user)
         {
             await _userRepo.UpdateUserAsync(user);
+        }
+
+        public async Task<List<string>> GetRolesAsync(User user)
+        {
+            return await _userRepo.GetRolesAsync(user);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _userRepo.GetUserByEmailAsync(email);
+        }
+
+        public async Task<bool> ValidateUserCredentialsAsync(string email, string password)
+        {
+            return await _userRepo.ValidateUserCredentialsAsync(email, password);
         }
     }
 }
