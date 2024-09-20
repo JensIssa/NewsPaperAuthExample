@@ -27,14 +27,16 @@ namespace NewsPaperAuthExample.Service
             await _commentRepo.DeleteComment(id);
         }
 
-        public Task<CommentDTO> GetCommentByArticleID(int id)
+        public async   Task<List<CommentDTO>> GetCommentByArticleID(int id)
         {
-            return _mapper.Map<CommentDTO>(_commentRepo.GetCommentById(id));
+            var comment = await _commentRepo.GetCommentById(id);  
+            return _mapper.Map<List<CommentDTO>>(comment); 
         }
 
         public async Task<List<CommentDTO>> GetComments()
         {
-            return await _commentRepo.GetComments();
+            var comments = await _commentRepo.GetComments();
+            return _mapper.Map<List<CommentDTO>>(comments);
         }
     }
 }

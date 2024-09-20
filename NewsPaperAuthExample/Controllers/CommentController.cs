@@ -17,7 +17,7 @@ namespace NewsPaperAuthExample.Controllers
         [Authorize(Roles = "Editor,Writer,Subsriber,Guest")]
         public async Task<List<CommentDTO>> GetCommentsByArticle(int articleId)
         {
-            return await _commentService.GetCommentsByArticle(articleId);
+            return await _commentService.GetCommentByArticleID(articleId);
         }
 
         [HttpPost("CreateComment")]

@@ -4,9 +4,9 @@ namespace NewsPaperAuthExample.Repo
 {
     public interface ICommentRepo
     {
-        List<Comment> GetCommentById(int id);
-        List<Comment> GetComments();
-        void CreateComment(Comment comment);
-        void DeleteComment(int id);
+        Task<List<Comment>> GetCommentById(int id);
+        Task<List<Comment>> GetComments();
+        Task CreateComment(Comment comment);
+        Task DeleteComment(int id);
     }
 }
