@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using NewsPaperAuthExample.Entities;
@@ -19,6 +20,23 @@ namespace NewsPaperAuthExample.Controllers
         {
             _userService = userService;
             _configuration = configuration;
+        }
+
+        [HttpGet("Test1")]
+        [Authorize(Roles = "Editor")]
+
+        public async Task<IActionResult> Test1()
+        {
+           
+            return Ok("Works");
+        }
+
+        [HttpGet("Test2")]
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> Test2()
+        {
+
+            return Ok("Works");
         }
 
         [HttpGet("GetUsers")]

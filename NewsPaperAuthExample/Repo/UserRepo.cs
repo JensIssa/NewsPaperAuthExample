@@ -28,9 +28,6 @@ namespace NewsPaperAuthExample.Repo
 
         public async Task CreateUserAsync(User user, string roleName)
         {
-            var passwordHasher = new PasswordHasher<User>();
-            user.PasswordHash = passwordHasher.HashPassword(user, user.PasswordHash);
-
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
