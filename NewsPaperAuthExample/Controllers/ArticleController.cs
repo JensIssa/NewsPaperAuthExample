@@ -29,21 +29,21 @@ namespace NewsPaperAuthExample.Controllers
 
         [HttpPost("CreateArticle")]
         [Authorize(Roles = "Writer")]
-        public async Task CreateArticle(ArticleDTO articleDTO)
+        public async Task CreateArticle([FromBody] ArticleDTO articleDTO)
         {
             await _service.CreateArticle(articleDTO);
         }
 
         [HttpPut("UpdateArticle")]
         [Authorize(Roles = "Editor,Writer")]
-        public async Task UpdateArticle(ArticleDTO articleDTO, UserEditDTO dto)
+        public async Task UpdateArticle([FromBody] ArticleDTO articleDTO, [FromBody]UserEditDTO dto)
         {
             await _service.UpdateArticle(articleDTO, dto );
         }
 
         [HttpDelete("DeleteArticle")]
         [Authorize(Roles = "Editor")]
-        public async Task DeleteArticle(int ArticleID, UserEditDTO dto)
+        public async Task DeleteArticle(int ArticleID, [FromBody] UserEditDTO dto)
         {
             await _service.DeleteArticle(ArticleID);
         }

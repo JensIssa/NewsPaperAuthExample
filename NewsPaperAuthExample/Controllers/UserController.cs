@@ -22,23 +22,6 @@ namespace NewsPaperAuthExample.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("Test1")]
-        [Authorize(Roles = "Editor")]
-
-        public async Task<IActionResult> Test1()
-        {
-           
-            return Ok("Works");
-        }
-
-        [HttpGet("Test2")]
-        [Authorize(Roles = "Writer")]
-        public async Task<IActionResult> Test2()
-        {
-
-            return Ok("Works");
-        }
-
         [HttpGet("GetUsers")]
         public async Task<ActionResult<IEnumerable<UserGetDTO>>> GetUsers()
         {

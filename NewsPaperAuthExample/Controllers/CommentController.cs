@@ -22,7 +22,7 @@ namespace NewsPaperAuthExample.Controllers
 
         [HttpPost("CreateComment")]
         [Authorize(Roles = "Writer,Editor,Subscriber")]
-        public async Task CreateComment(CommentDTO commentDTO)
+        public async Task CreateComment([FromBody] CommentDTO commentDTO)
         {
             await _commentService.CreateComment(commentDTO);
         }

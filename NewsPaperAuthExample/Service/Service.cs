@@ -19,11 +19,12 @@ namespace NewsPaperAuthExample.Service
             _mapper = mapper;
         }
 
-        public  Task CreateArticle(ArticleDTO articleDTO)
+        public  async Task CreateArticle(ArticleDTO articleDTO)
         {
+            User user = await _userRepo.GetUserByIdAsync(articleDTO.UserId);
             Article article = _mapper.Map<Article>(articleDTO);
+            article.User = user;
             _repo.CreateArticle(article);
-            return Task.CompletedTask;
         }
 
         public Task DeleteArticle(int id)

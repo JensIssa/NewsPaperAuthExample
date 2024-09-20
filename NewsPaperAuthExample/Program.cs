@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NewsPaperAuthExample.Entities;
+using NewsPaperAuthExample.Entities.DTO;
 using NewsPaperAuthExample.Entities.DTO.Users;
 using NewsPaperAuthExample.Repo;
 using NewsPaperAuthExample.Service;
@@ -38,6 +39,12 @@ var mapper = new MapperConfiguration(options =>
     options.CreateMap<UserAddDTO, User>();
     options.CreateMap<UserEditDTO, User>();
     options.CreateMap<User, UserGetDTO>();
+    options.CreateMap<Article, ArticleDTO>();
+    options.CreateMap<ArticleDTO, Article>();
+    options.CreateMap<Comment, CommentDTO>();
+    options.CreateMap<CommentDTO, Comment>();
+
+
 }).CreateMapper();
 
 builder.Services.AddSingleton(mapper);

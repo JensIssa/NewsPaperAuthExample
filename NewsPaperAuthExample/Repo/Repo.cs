@@ -35,6 +35,7 @@ namespace NewsPaperAuthExample.Repo
         public void UpdateArticle(Article article)
         {
             _context.Articles.Update(article);
+            _context.SaveChanges();
         }
     }
 }
